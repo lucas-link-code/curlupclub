@@ -1,0 +1,22 @@
+---
+import MainLayout from '~/components/layout/MainLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import LegalPage from '~/components/sections/LegalPage.astro';
+import { legalContent } from '~/content/legal';
+
+const { privacyPolicy } = legalContent;
+---
+
+<MainLayout
+  title={privacyPolicy.title}
+  description="Privacy Policy for Curl Up Club Cat Sitting."
+>
+  <Section spacing="lg" tone="canvas">
+    <LegalPage
+      title={privacyPolicy.title}
+      intro={privacyPolicy.intro}
+      lastUpdated={privacyPolicy.lastUpdated}
+      sections={privacyPolicy.sections}
+    />
+  </Section>
+</MainLayout>

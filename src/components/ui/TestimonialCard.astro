@@ -1,0 +1,46 @@
+---
+interface Props {
+  quote: string;
+  name: string;
+  location?: string;
+  date?: string;
+  source?: string;
+  reply?: string;
+}
+
+const { quote, name, location, date, source, reply } = Astro.props;
+---
+
+<figure
+  class="rounded-3xl p-7 bg-card border border-border-muted/40 shadow-soft h-full flex flex-col"
+>
+  <svg
+    aria-hidden="true"
+    class="h-7 w-7 text-accent mb-4"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M9 7H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2v-2H5V9h4V7Zm10 0h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2v-2h-2V9h4V7Z" />
+  </svg>
+  <blockquote class="text-cream/90 leading-relaxed flex-grow text-base">
+    {quote}
+  </blockquote>
+  <figcaption class="mt-5 pt-5 border-t border-border-muted/30">
+    <p class="text-sm font-medium text-cream">{name}</p>
+    {location && <p class="text-xs text-cream/60 mt-0.5">{location}</p>}
+    {(date || source) && (
+      <p class="text-xs text-cream/55 mt-1">
+        {[source, date].filter(Boolean).join(' \u00b7 ')}
+      </p>
+    )}
+  </figcaption>
+
+  {reply && (
+    <div class="mt-5 rounded-2xl bg-canvas-soft/60 border border-border-muted/30 p-4">
+      <p class="text-xs uppercase tracking-wider text-accent/90 font-medium mb-1.5">
+        Reply from Curl Up Club
+      </p>
+      <p class="text-sm text-cream/85 leading-relaxed">{reply}</p>
+    </div>
+  )}
+</figure>

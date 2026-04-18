@@ -1,0 +1,32 @@
+name = "curlupclub-forms"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+# Bind two same-origin routes on the apex.
+# This lets the static site POST to /api/* without any CORS handshake.
+# Both routes are required for the public booking-request and the private client-intake forms.
+routes = [
+  { pattern = "curlupclub.com/api/booking-request", zone_name = "curlupclub.com" },
+  { pattern = "curlupclub.com/api/client-intake", zone_name = "curlupclub.com" },
+]
+
+[vars]
+RECIPIENT_EMAIL = "contact@curlupclub.com"
+SENDER_EMAIL = "no-reply@curlupclub.com"
+SENDER_NAME = "Curl Up Club Website"
+EMAIL_TRANSPORT = "resend"
+RATE_LIMIT_WINDOW_SECONDS = "300"
+RATE_LIMIT_MAX_SUBMISSIONS = "5"
+
+# Required Worker secrets, set via:
+#   wrangler secret put TURNSTILE_SECRET_KEY
+#   wrangler secret put RESEND_API_KEY        # required when EMAIL_TRANSPORT=resend
+#   wrangler secret put MAILCHANNELS_API_KEY  # required when EMAIL_TRANSPORT=mailchannels
+#
+# Optional: a KV namespace for rate-limiting per IP.
+# Without it, rate limiting falls back to an in-memory per-isolate counter
+# which is best-effort only.
+#
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT_KV"
+# id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"

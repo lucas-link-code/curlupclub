@@ -1,0 +1,17 @@
+{
+  "name": "curlupclub-worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cloudflare Worker form backend for Curl Up Club Cat Sitting (Turnstile verify, rate limit, email transport).",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240924.0",
+    "typescript": "^5.6.3",
+    "wrangler": "^3.78.0"
+  }
+}

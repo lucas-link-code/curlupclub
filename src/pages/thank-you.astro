@@ -1,0 +1,37 @@
+---
+import MainLayout from '~/components/layout/MainLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import Button from '~/components/ui/Button.astro';
+---
+
+<MainLayout
+  title="Thank you"
+  description="Your enquiry has been received. Leah will reply personally as soon as possible."
+  noindex
+>
+  <Section spacing="lg" tone="canvas">
+    <div class="max-w-2xl mx-auto text-center">
+      <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-accent text-ink mb-6">
+        <svg
+          aria-hidden="true"
+          class="h-8 w-8"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 1 1 1.4-1.4L9 11.6l6.3-6.3a1 1 0 0 1 1.4 0Z" />
+        </svg>
+      </span>
+      <p class="eyebrow mb-3">Thank you</p>
+      <h1 class="text-4xl md:text-5xl font-medium leading-[1.1]">
+        Your enquiry has been received
+      </h1>
+      <p class="mt-6 text-lg text-cream/85 leading-relaxed">
+        Leah will reply personally as soon as possible. If your dates are within the next few days, please feel free to send an email directly as a follow-up.
+      </p>
+      <div class="mt-9 flex flex-wrap justify-center gap-3">
+        <Button href="/" variant="primary">Back to home</Button>
+        <Button href="/services/" variant="secondary">See services</Button>
+      </div>
+    </div>
+  </Section>
+</MainLayout>

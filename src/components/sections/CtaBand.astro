@@ -1,0 +1,45 @@
+---
+import Button from '~/components/ui/Button.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  body?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  body,
+  primaryHref = '/contact/',
+  primaryLabel = 'Request cat care',
+  secondaryHref,
+  secondaryLabel,
+} = Astro.props;
+---
+
+<section class="bg-canvas-deep">
+  <div class="container-page py-16 md:py-24">
+    <div class="rounded-3xl bg-canvas-soft border border-border-muted/40 p-8 md:p-14 text-center shadow-soft">
+      {eyebrow && <p class="eyebrow mb-3">{eyebrow}</p>}
+      <h2 class="text-3xl md:text-4xl font-medium max-w-2xl mx-auto">{title}</h2>
+      {body && (
+        <p class="mt-4 text-cream/80 max-w-xl mx-auto leading-relaxed">{body}</p>
+      )}
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <Button href={primaryHref} variant="primary" size="lg">
+          {primaryLabel}
+        </Button>
+        {secondaryHref && secondaryLabel && (
+          <Button href={secondaryHref} variant="secondary" size="lg">
+            {secondaryLabel}
+          </Button>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

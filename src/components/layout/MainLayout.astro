@@ -1,0 +1,50 @@
+---
+import '~/styles/global.css';
+import SeoHead from './SeoHead.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  includeBusinessSchema?: boolean;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage,
+  noindex = false,
+  includeBusinessSchema = false,
+  bodyClass = '',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <SeoHead
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      noindex={noindex}
+      includeBusinessSchema={includeBusinessSchema}
+    />
+  </head>
+  <body class={`bg-canvas text-cream min-h-screen antialiased ${bodyClass}`}>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-full focus:bg-accent focus:text-ink"
+    >
+      Skip to content
+    </a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,60 @@
+---
+import MainLayout from '~/components/layout/MainLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import BookingRequestForm from '~/components/forms/BookingRequestForm.astro';
+import { businessConfig } from '~/config/business';
+---
+
+<MainLayout
+  title="Contact &amp; booking request"
+  description="Send a short enquiry to Curl Up Club Cat Sitting. Leah will reply personally to talk through availability and care."
+>
+  <Section spacing="lg" tone="canvas">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-start">
+      <aside class="lg:sticky lg:top-24 space-y-6">
+        <div>
+          <p class="eyebrow mb-3">Get in touch</p>
+          <h1 class="text-4xl md:text-5xl font-medium leading-[1.05]">
+            Request cat care
+          </h1>
+          <p class="mt-5 text-cream/85 leading-relaxed">
+            Share a few details about your cats and your dates. Leah will reply personally to talk through availability and care.
+          </p>
+        </div>
+
+        <div class="rounded-2xl bg-card border border-border-muted/40 p-5 space-y-3 text-sm shadow-soft">
+          <p class="font-medium text-cream">Other ways to reach us</p>
+          <p>
+            <a
+              href={`mailto:${businessConfig.primaryEmail}`}
+              class="text-accent underline underline-offset-2 break-all"
+            >{businessConfig.primaryEmail}</a>
+          </p>
+          <p>
+            <a
+              href={`tel:${businessConfig.phone}`}
+              class="text-accent underline underline-offset-2"
+            >{businessConfig.phoneDisplay}</a>
+          </p>
+          <p class="text-cream/85">
+            {businessConfig.hours.summary}
+          </p>
+          <p class="text-cream/70 text-xs leading-relaxed">
+            {businessConfig.responsePromise}.
+          </p>
+        </div>
+
+        <div class="rounded-2xl bg-canvas-soft/60 border border-border-muted/30 p-5 text-xs text-cream/75 leading-relaxed">
+          <p class="font-medium text-cream mb-1">A note on detailed care information</p>
+          <p>
+            This first form is intentionally short. If your booking is agreed, you will receive a separate, more detailed care form to share feeding, medication, access and emergency contact information.
+          </p>
+        </div>
+      </aside>
+
+      <div>
+        <BookingRequestForm />
+      </div>
+    </div>
+  </Section>
+</MainLayout>

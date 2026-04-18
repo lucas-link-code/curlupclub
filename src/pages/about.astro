@@ -1,0 +1,90 @@
+---
+import MainLayout from '~/components/layout/MainLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import CtaBand from '~/components/sections/CtaBand.astro';
+import { aboutContent } from '~/content/about';
+---
+
+<MainLayout
+  title={aboutContent.pageTitle}
+  description={aboutContent.pageDescription}
+>
+  <Section spacing="lg" tone="canvas">
+    <div class="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-start">
+      <div class="max-w-2xl">
+        <p class="eyebrow mb-3">About</p>
+        <h1 class="text-4xl md:text-5xl font-medium leading-[1.1]">
+          {aboutContent.pageTitle}
+        </h1>
+        <p class="mt-6 text-lg text-cream/85 leading-relaxed">
+          {aboutContent.intro}
+        </p>
+      </div>
+
+      <div class="relative">
+        <div class="aspect-square rounded-3xl overflow-hidden ring-1 ring-border-muted/40 shadow-lift bg-canvas-deep">
+          <img
+            src="/images/brand/curl-up-club-logo.png"
+            alt="Curl Up Club logo of a sleeping cat"
+            width="640"
+            height="640"
+            class="h-full w-full object-cover"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section spacing="lg" tone="soft">
+    <div class="grid gap-6 md:grid-cols-3">
+      {aboutContent.storySections.map((story) => (
+        <article class="rounded-3xl bg-card border border-border-muted/40 p-7 shadow-soft">
+          <h2 class="text-xl font-medium text-cream mb-3">{story.title}</h2>
+          <p class="text-sm text-cream/85 leading-relaxed">{story.body}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section spacing="lg" tone="canvas">
+    <SectionHeading
+      eyebrow={aboutContent.whyHomeVisits.eyebrow}
+      title={aboutContent.whyHomeVisits.title}
+      align="center"
+      class="mb-12"
+    />
+    <div class="grid gap-5 md:grid-cols-2 max-w-4xl mx-auto">
+      {aboutContent.whyHomeVisits.points.map((point) => (
+        <div class="rounded-2xl bg-card-soft/60 border border-border-muted/30 p-6 flex gap-4">
+          <span class="mt-1 inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-accent text-ink">
+            <svg
+              aria-hidden="true"
+              class="h-4 w-4"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 1 1 1.4-1.4L9 11.6l6.3-6.3a1 1 0 0 1 1.4 0Z" />
+            </svg>
+          </span>
+          <div>
+            <h3 class="text-base font-medium text-cream">{point.title}</h3>
+            <p class="mt-1 text-sm text-cream/80">{point.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <CtaBand
+    eyebrow="Get in touch"
+    title="Tell Leah about your cats"
+    body="Send a short enquiry to start the conversation. You will hear back personally."
+    primaryHref="/contact/"
+    primaryLabel="Request cat care"
+    secondaryHref="/services/"
+    secondaryLabel="See services"
+  />
+</MainLayout>

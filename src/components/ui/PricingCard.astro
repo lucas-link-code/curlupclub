@@ -1,0 +1,59 @@
+---
+interface Props {
+  name: string;
+  price: string;
+  unit?: string;
+  description: string;
+  includes: string[];
+  featured?: boolean;
+}
+
+const { name, price, unit, description, includes, featured = false } =
+  Astro.props;
+---
+
+<article
+  class={`rounded-3xl p-7 md:p-9 shadow-soft flex flex-col h-full ${
+    featured
+      ? 'bg-accent text-ink border border-accent-soft'
+      : 'bg-card border border-border-muted/40 text-cream'
+  }`}
+>
+  <header class="mb-6">
+    <h3 class={`text-2xl font-medium ${featured ? 'text-ink' : 'text-cream'}`}>
+      {name}
+    </h3>
+    <p class={`mt-2 text-sm ${featured ? 'text-ink/80' : 'text-cream/75'}`}>
+      {description}
+    </p>
+  </header>
+
+  <div class="mb-6">
+    <span class={`text-4xl md:text-5xl font-serif font-medium ${featured ? 'text-ink' : 'text-cream'}`}>
+      {price}
+    </span>
+    {unit && (
+      <span class={`ml-2 text-sm ${featured ? 'text-ink/70' : 'text-cream/65'}`}>
+        {unit}
+      </span>
+    )}
+  </div>
+
+  <ul class="space-y-3 mb-8 flex-grow">
+    {includes.map((item) => (
+      <li class="flex items-start gap-2 text-sm leading-relaxed">
+        <svg
+          aria-hidden="true"
+          class={`mt-0.5 h-4 w-4 flex-shrink-0 ${featured ? 'text-ink' : 'text-accent'}`}
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 1 1 1.4-1.4L9 11.6l6.3-6.3a1 1 0 0 1 1.4 0Z" />
+        </svg>
+        <span class={featured ? 'text-ink/90' : 'text-cream/85'}>{item}</span>
+      </li>
+    ))}
+  </ul>
+
+  <slot />
+</article>

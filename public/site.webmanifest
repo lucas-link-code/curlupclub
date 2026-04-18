@@ -1,0 +1,22 @@
+{
+  "name": "Curl Up Club Cat Sitting",
+  "short_name": "Curl Up Club",
+  "description": "Calm, reliable in-home cat sitting near Llangollen.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4b5647",
+  "theme_color": "#4b5647",
+  "icons": [
+    {
+      "src": "/images/brand/curl-up-club-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

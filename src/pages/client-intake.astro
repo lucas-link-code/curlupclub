@@ -1,0 +1,30 @@
+---
+import MainLayout from '~/components/layout/MainLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import ClientIntakeForm from '~/components/forms/ClientIntakeForm.astro';
+---
+
+<MainLayout
+  title="Client care details"
+  description="Detailed care information for confirmed Curl Up Club bookings."
+  noindex
+>
+  <Section spacing="lg" tone="canvas">
+    <div class="max-w-3xl mx-auto">
+      <p class="eyebrow mb-3">Client intake</p>
+      <h1 class="text-4xl md:text-5xl font-medium leading-[1.05]">
+        Care details for your booking
+      </h1>
+      <p class="mt-6 text-cream/85 leading-relaxed">
+        This form collects the practical details Leah needs to look after your cats well: feeding, litter, medication, access and emergency contacts. Please share only what you are comfortable sharing.
+      </p>
+      <p class="mt-3 text-sm text-cream/65 leading-relaxed">
+        This page is not linked from the main site navigation. If you reached it directly, please complete the form only after your booking has been agreed.
+      </p>
+
+      <div class="mt-10">
+        <ClientIntakeForm />
+      </div>
+    </div>
+  </Section>
+</MainLayout>

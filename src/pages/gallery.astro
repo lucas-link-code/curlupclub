@@ -1,0 +1,74 @@
+---
+import MainLayout from '~/components/layout/MainLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import CtaBand from '~/components/sections/CtaBand.astro';
+import Lightbox from '~/components/ui/Lightbox.astro';
+import { galleryContent } from '~/content/gallery';
+---
+
+<MainLayout
+  title={galleryContent.pageTitle}
+  description={galleryContent.pageDescription}
+>
+  <Section spacing="lg" tone="canvas">
+    <div class="max-w-2xl">
+      <p class="eyebrow mb-3">Gallery</p>
+      <h1 class="text-4xl md:text-5xl font-medium leading-[1.1]">
+        {galleryContent.pageTitle}
+      </h1>
+      <p class="mt-6 text-lg text-cream/85 leading-relaxed">
+        {galleryContent.intro}
+      </p>
+    </div>
+  </Section>
+
+  <Section spacing="md" tone="canvas">
+    {galleryContent.images.length === 0 ? (
+      <p class="text-cream/70 text-center max-w-md mx-auto">
+        Photos will be added soon.
+      </p>
+    ) : (
+      <ul
+        class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        role="list"
+      >
+        {galleryContent.images.map((image, index) => (
+          <li>
+            <button
+              type="button"
+              data-lightbox-trigger
+              data-src={image.src}
+              data-alt={image.alt}
+              data-caption={image.caption ?? ''}
+              class="group block w-full aspect-[4/5] sm:aspect-square rounded-3xl overflow-hidden ring-1 ring-border-muted/40 bg-canvas-deep shadow-soft focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+              aria-label={`Open image: ${image.alt}`}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </button>
+            {image.caption && (
+              <p class="mt-2 text-xs text-cream/65 px-1">{image.caption}</p>
+            )}
+          </li>
+        ))}
+      </ul>
+    )}
+  </Section>
+
+  <Lightbox />
+
+  <CtaBand
+    eyebrow="Friendly request"
+    title="Photos are shared with permission"
+    body="New gallery photos are added gradually and only ever with the cat owner's permission."
+    primaryHref="/contact/"
+    primaryLabel="Get in touch"
+    secondaryHref="/services/"
+    secondaryLabel="See services"
+  />
+</MainLayout>

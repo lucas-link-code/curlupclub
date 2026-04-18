@@ -1,0 +1,121 @@
+---
+type FieldType =
+  | 'text'
+  | 'email'
+  | 'tel'
+  | 'date'
+  | 'number'
+  | 'textarea'
+  | 'select';
+
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  type?: FieldType;
+  required?: boolean;
+  optional?: boolean;
+  placeholder?: string;
+  hint?: string;
+  options?: Option[];
+  rows?: number;
+  autocomplete?: string;
+  value?: string;
+  min?: string | number;
+  max?: string | number;
+  inputmode?: string;
+  pattern?: string;
+}
+
+const {
+  id,
+  name,
+  label,
+  type = 'text',
+  required = false,
+  optional = false,
+  placeholder,
+  hint,
+  options = [],
+  rows = 4,
+  autocomplete,
+  value,
+  min,
+  max,
+  inputmode,
+  pattern,
+} = Astro.props;
+
+const baseField =
+  'mt-2 block w-full rounded-2xl border border-border-muted/50 bg-canvas-deep/60 px-4 py-3 text-cream placeholder:text-cream/40 focus:border-accent focus:outline-2 focus:outline-accent focus:outline-offset-1 transition-colors';
+const hintId = hint ? `${id}-hint` : undefined;
+---
+
+<div class="form-field" data-field={name}>
+  <label for={id} class="block text-sm font-medium text-cream">
+    {label}
+    {required && <span class="text-accent ml-1" aria-hidden="true">*</span>}
+    {optional && (
+      <span class="ml-1.5 text-xs text-cream/55 font-normal">(optional)</span>
+    )}
+  </label>
+
+  {type === 'textarea' ? (
+    <textarea
+      id={id}
+      name={name}
+      rows={rows}
+      required={required}
+      placeholder={placeholder}
+      autocomplete={autocomplete}
+      aria-describedby={hintId}
+      class={`${baseField} resize-y min-h-[7rem]`}
+    >{value}</textarea>
+  ) : type === 'select' ? (
+    <select
+      id={id}
+      name={name}
+      required={required}
+      autocomplete={autocomplete}
+      aria-describedby={hintId}
+      class={baseField}
+    >
+      {options.map((opt) => (
+        <option value={opt.value} selected={value === opt.value}>
+          {opt.label}
+        </option>
+      ))}
+    </select>
+  ) : (
+    <input
+      id={id}
+      name={name}
+      type={type}
+      required={required}
+      placeholder={placeholder}
+      autocomplete={autocomplete}
+      value={value}
+      min={min}
+      max={max}
+      inputmode={inputmode as any}
+      pattern={pattern}
+      aria-describedby={hintId}
+      class={baseField}
+    />
+  )}
+
+  {hint && (
+    <p id={hintId} class="mt-1.5 text-xs text-cream/60">{hint}</p>
+  )}
+
+  <p
+    class="mt-1.5 text-xs text-accent hidden"
+    role="alert"
+    data-error-for={name}
+  ></p>
+</div>

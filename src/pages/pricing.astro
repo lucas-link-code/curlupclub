@@ -1,0 +1,70 @@
+---
+import MainLayout from '~/components/layout/MainLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import PricingCard from '~/components/ui/PricingCard.astro';
+import CtaBand from '~/components/sections/CtaBand.astro';
+import { pricingContent } from '~/content/pricing';
+---
+
+<MainLayout
+  title={pricingContent.pageTitle}
+  description={pricingContent.pageDescription}
+>
+  <Section spacing="lg" tone="canvas">
+    <div class="max-w-2xl">
+      <p class="eyebrow mb-3">Transparent pricing</p>
+      <h1 class="text-4xl md:text-5xl font-medium leading-[1.1]">
+        {pricingContent.pageTitle}
+      </h1>
+      <p class="mt-6 text-lg text-cream/85 leading-relaxed">
+        {pricingContent.intro}
+      </p>
+    </div>
+  </Section>
+
+  <Section spacing="md" tone="canvas">
+    <div class="grid gap-6 md:grid-cols-3 items-stretch">
+      {pricingContent.plans.map((plan) => (
+        <PricingCard
+          name={plan.name}
+          price={plan.price}
+          unit={plan.unit}
+          description={plan.description}
+          includes={plan.includes}
+          featured={plan.featured}
+        />
+      ))}
+    </div>
+  </Section>
+
+  <Section spacing="md" tone="soft">
+    <div class="rounded-3xl bg-card border border-border-muted/40 p-7 md:p-9 max-w-3xl mx-auto shadow-soft">
+      <h2 class="text-xl font-medium text-cream">Good to know</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {pricingContent.pricingNotes.map((note) => (
+          <li class="flex items-start gap-2.5">
+            <svg
+              aria-hidden="true"
+              class="mt-0.5 h-4 w-4 text-accent flex-shrink-0"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <circle cx="10" cy="10" r="2" />
+            </svg>
+            <span class="text-cream/85 leading-relaxed">{note}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <CtaBand
+    eyebrow="Next step"
+    title="Check availability for your dates"
+    body="Send a short enquiry with your dates and the basics. Leah will confirm pricing and availability personally."
+    primaryHref="/contact/"
+    primaryLabel="Request availability"
+    secondaryHref="/faq/"
+    secondaryLabel="Read FAQs"
+  />
+</MainLayout>

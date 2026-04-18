@@ -1,0 +1,21 @@
+---
+interface Props {
+  tone?: 'info' | 'success' | 'error';
+  class?: string;
+}
+
+const { tone = 'info', class: classProp = '' } = Astro.props;
+
+const toneMap = {
+  info: 'bg-canvas-soft/70 border-border-muted/40 text-cream/85',
+  success: 'bg-accent/15 border-accent/40 text-cream',
+  error: 'bg-accent/20 border-accent/60 text-cream',
+};
+---
+
+<div
+  class={`rounded-2xl border px-4 py-3 text-sm leading-relaxed ${toneMap[tone]} ${classProp}`}
+  role={tone === 'error' ? 'alert' : 'status'}
+>
+  <slot />
+</div>

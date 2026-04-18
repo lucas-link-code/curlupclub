@@ -1,0 +1,20 @@
+---
+interface Props {
+  tone?: 'cream' | 'accent' | 'outline';
+  class?: string;
+}
+
+const { tone = 'cream', class: classProp = '' } = Astro.props;
+
+const toneMap = {
+  cream: 'bg-cream/10 text-cream border border-cream/15',
+  accent: 'bg-accent text-ink',
+  outline: 'border border-border-muted text-cream',
+};
+---
+
+<span
+  class={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium tracking-wide uppercase ${toneMap[tone]} ${classProp}`}
+>
+  <slot />
+</span>

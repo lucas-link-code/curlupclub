@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+.astro/
+
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Wrangler / Cloudflare
+worker/.dev.vars
+worker/.wrangler/
+worker/dist/
+worker/node_modules/
+
+# Internal planning notes - not for public repo
+curlupclub_proposed_file_tree_and_content_pack.md

@@ -1,0 +1,50 @@
+---
+import MainLayout from '~/components/layout/MainLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import CtaBand from '~/components/sections/CtaBand.astro';
+import { faqContent } from '~/content/faq';
+---
+
+<MainLayout
+  title={faqContent.pageTitle}
+  description={faqContent.pageDescription}
+>
+  <Section spacing="lg" tone="canvas">
+    <div class="max-w-2xl">
+      <p class="eyebrow mb-3">Helpful answers</p>
+      <h1 class="text-4xl md:text-5xl font-medium leading-[1.1]">
+        {faqContent.pageTitle}
+      </h1>
+    </div>
+  </Section>
+
+  <Section spacing="md" tone="canvas">
+    <div class="max-w-3xl mx-auto space-y-3">
+      {faqContent.items.map((item) => (
+        <details class="group rounded-2xl bg-card border border-border-muted/40 p-5 md:p-6 shadow-soft transition-colors hover:border-border-muted/70">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-cream font-medium text-base md:text-lg">
+            <span>{item.question}</span>
+            <svg
+              aria-hidden="true"
+              class="h-5 w-5 text-accent transition-transform duration-200 group-open:rotate-45 flex-shrink-0"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path d="M10 4a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0v-4H5a1 1 0 1 1 0-2h4V5a1 1 0 0 1 1-1Z" />
+            </svg>
+          </summary>
+          <p class="mt-4 text-cream/80 leading-relaxed text-sm md:text-base">
+            {item.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+  </Section>
+
+  <CtaBand
+    title="Still have a question?"
+    body="If your question is not covered here, please get in touch and Leah will reply personally."
+    primaryHref="/contact/"
+    primaryLabel="Get in touch"
+  />
+</MainLayout>

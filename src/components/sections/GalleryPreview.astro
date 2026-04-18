@@ -1,0 +1,37 @@
+---
+import Section from '~/components/ui/Section.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import Button from '~/components/ui/Button.astro';
+import { galleryContent } from '~/content/gallery';
+import { homepageContent } from '~/content/homepage';
+
+const previewImages = galleryContent.images.slice(0, 4);
+---
+
+<Section spacing="lg" tone="soft">
+  <SectionHeading
+    eyebrow="Gallery"
+    title={homepageContent.featuredSections.galleryTitle}
+    subtitle={homepageContent.featuredSections.galleryHint}
+    align="center"
+    class="mb-12"
+  />
+
+  <div class="grid gap-4 grid-cols-2 md:grid-cols-4">
+    {previewImages.map((image) => (
+      <div class="aspect-square rounded-2xl overflow-hidden ring-1 ring-border-muted/40 bg-canvas-deep">
+        <img
+          src={image.src}
+          alt={image.alt}
+          class="h-full w-full object-cover hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    ))}
+  </div>
+
+  <div class="mt-10 flex justify-center">
+    <Button href="/gallery/" variant="secondary">View the gallery</Button>
+  </div>
+</Section>

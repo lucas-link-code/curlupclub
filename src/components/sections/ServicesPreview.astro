@@ -1,0 +1,50 @@
+---
+import Section from '~/components/ui/Section.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import Card from '~/components/ui/Card.astro';
+import Button from '~/components/ui/Button.astro';
+import { servicesContent } from '~/content/services';
+import { homepageContent } from '~/content/homepage';
+
+const previewServices = servicesContent.services.slice(0, 3);
+---
+
+<Section spacing="lg" tone="canvas">
+  <SectionHeading
+    eyebrow="Services"
+    title={homepageContent.featuredSections.servicesTitle}
+    subtitle={homepageContent.featuredSections.servicesSubtitle}
+    align="center"
+    class="mb-12"
+  />
+
+  <div class="grid gap-6 md:grid-cols-3">
+    {previewServices.map((service) => (
+      <Card class="h-full">
+        <h3 class="text-xl font-medium text-cream mb-3">{service.title}</h3>
+        <p class="text-sm text-cream/75 leading-relaxed mb-5">
+          {service.description}
+        </p>
+        <ul class="space-y-2 text-sm">
+          {service.includes.slice(0, 4).map((item) => (
+            <li class="flex items-start gap-2">
+              <svg
+                aria-hidden="true"
+                class="mt-1 h-3.5 w-3.5 text-accent flex-shrink-0"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <circle cx="10" cy="10" r="4" />
+              </svg>
+              <span class="text-cream/85">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </Card>
+    ))}
+  </div>
+
+  <div class="mt-12 flex justify-center">
+    <Button href="/services/" variant="secondary">See all services</Button>
+  </div>
+</Section>

@@ -1,0 +1,36 @@
+---
+import Section from '~/components/ui/Section.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import TestimonialCard from '~/components/ui/TestimonialCard.astro';
+import { testimonialsContent } from '~/content/testimonials';
+---
+
+<Section spacing="lg" tone="canvas">
+  <SectionHeading
+    eyebrow="Kind words"
+    title="Calm cats, happy owners"
+    subtitle={testimonialsContent.intro}
+    align="center"
+    class="mb-12"
+  />
+
+  <div class="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
+    {testimonialsContent.items.map((item) => (
+      <TestimonialCard
+        quote={item.quote}
+        name={item.name}
+        location={item.location}
+        date={item.date}
+        source={item.source}
+        reply={item.reply}
+      />
+    ))}
+  </div>
+
+  <p class="mt-8 text-center text-xs text-cream/55 max-w-md mx-auto">
+    Reviews shown with kind permission. More on the
+    <a href="https://www.facebook.com/profile.php?id=61580661264339" target="_blank" rel="noopener noreferrer" class="text-accent underline underline-offset-2">
+      Curl Up Club Facebook page
+    </a>.
+  </p>
+</Section>

@@ -1,0 +1,23 @@
+---
+import MainLayout from '~/components/layout/MainLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import Button from '~/components/ui/Button.astro';
+---
+
+<MainLayout title="Page not found" description="That page does not exist." noindex>
+  <Section spacing="lg" tone="canvas">
+    <div class="max-w-xl mx-auto text-center">
+      <p class="eyebrow mb-3">404</p>
+      <h1 class="text-4xl md:text-5xl font-medium leading-[1.1]">
+        That page seems to have curled up somewhere else
+      </h1>
+      <p class="mt-6 text-lg text-cream/85 leading-relaxed">
+        The page you were looking for could not be found. It may have moved or never existed.
+      </p>
+      <div class="mt-9 flex flex-wrap justify-center gap-3">
+        <Button href="/" variant="primary">Back to home</Button>
+        <Button href="/contact/" variant="secondary">Get in touch</Button>
+      </div>
+    </div>
+  </Section>
+</MainLayout>

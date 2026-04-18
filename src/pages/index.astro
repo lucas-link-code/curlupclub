@@ -1,0 +1,32 @@
+---
+import MainLayout from '~/components/layout/MainLayout.astro';
+import Hero from '~/components/sections/Hero.astro';
+import TrustBar from '~/components/sections/TrustBar.astro';
+import ServicesPreview from '~/components/sections/ServicesPreview.astro';
+import PricingPreview from '~/components/sections/PricingPreview.astro';
+import BookingProcess from '~/components/sections/BookingProcess.astro';
+import ServiceAreaPreview from '~/components/sections/ServiceAreaPreview.astro';
+import Testimonials from '~/components/sections/Testimonials.astro';
+import GalleryPreview from '~/components/sections/GalleryPreview.astro';
+import CtaBand from '~/components/sections/CtaBand.astro';
+---
+
+<MainLayout includeBusinessSchema>
+  <Hero />
+  <TrustBar />
+  <ServicesPreview />
+  <PricingPreview />
+  <BookingProcess />
+  <ServiceAreaPreview />
+  <Testimonials />
+  <GalleryPreview />
+  <CtaBand
+    eyebrow="Ready to start"
+    title="Tell us about your cats and your dates"
+    body="Send a short enquiry and Leah will reply personally to talk through availability and care."
+    primaryHref="/contact/"
+    primaryLabel="Request cat care"
+    secondaryHref="/services/"
+    secondaryLabel="See services"
+  />
+</MainLayout>

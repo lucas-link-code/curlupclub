@@ -1,0 +1,30 @@
+---
+import Section from '~/components/ui/Section.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import { bookingProcessContent } from '~/content/booking-process';
+import { homepageContent } from '~/content/homepage';
+---
+
+<Section spacing="lg" tone="canvas">
+  <SectionHeading
+    eyebrow="The process"
+    title={homepageContent.featuredSections.processTitle}
+    subtitle={homepageContent.featuredSections.processSubtitle}
+    align="center"
+    class="mb-14"
+  />
+
+  <ol class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+    {bookingProcessContent.steps.map((step) => (
+      <li class="relative rounded-3xl bg-card border border-border-muted/40 p-7 shadow-soft">
+        <span class="font-serif text-3xl text-accent/85 leading-none">
+          {step.number}
+        </span>
+        <h3 class="mt-4 text-lg font-medium text-cream">{step.title}</h3>
+        <p class="mt-2 text-sm text-cream/75 leading-relaxed">
+          {step.body}
+        </p>
+      </li>
+    ))}
+  </ol>
+</Section>

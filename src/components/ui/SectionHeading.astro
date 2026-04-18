@@ -1,0 +1,30 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+  level?: 1 | 2 | 3;
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  align = 'left',
+  level = 2,
+  class: classProp = '',
+} = Astro.props;
+
+const Tag = `h${level}` as 'h1' | 'h2' | 'h3';
+const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
+---
+
+<header class={`max-w-3xl ${alignClass} ${classProp}`}>
+  {eyebrow && <p class="eyebrow mb-2">{eyebrow}</p>}
+  <Tag class="text-3xl md:text-4xl lg:text-5xl font-medium">{title}</Tag>
+  {subtitle && (
+    <p class="mt-4 text-lg text-cream/80 leading-relaxed">{subtitle}</p>
+  )}
+</header>

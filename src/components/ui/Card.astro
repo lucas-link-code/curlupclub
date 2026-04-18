@@ -1,0 +1,33 @@
+---
+type Padding = 'sm' | 'md' | 'lg';
+type Tone = 'default' | 'soft' | 'accent';
+
+export interface Props {
+  class?: string;
+  as?: string;
+  padding?: Padding;
+  tone?: Tone;
+}
+
+const props = Astro.props as Props;
+const Tag = (props.as ?? 'div') as 'div';
+const classProp: string = props.class ?? '';
+const padding: Padding = props.padding ?? 'md';
+const tone: Tone = props.tone ?? 'default';
+
+const padMap: Record<Padding, string> = {
+  sm: 'p-5',
+  md: 'p-7',
+  lg: 'p-9',
+};
+
+const toneMap: Record<Tone, string> = {
+  default: 'bg-card border border-border-muted/40',
+  soft: 'bg-card-soft border border-border-muted/30',
+  accent: 'bg-accent text-ink border border-accent-soft',
+};
+---
+
+<Tag class={`rounded-3xl ${padMap[padding]} ${toneMap[tone]} shadow-soft ${classProp}`}>
+  <slot />
+</Tag>

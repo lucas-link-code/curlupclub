@@ -1,0 +1,308 @@
+---
+import FormField from './FormField.astro';
+import FormNotice from './FormNotice.astro';
+import Button from '~/components/ui/Button.astro';
+import { formConfig } from '~/config/form';
+---
+
+<form
+  id="client-intake-form"
+  method="post"
+  action={formConfig.clientIntakeEndpoint}
+  novalidate
+  data-success-redirect="/thank-you/"
+  data-turnstile-key={formConfig.turnstileSiteKey}
+  class="space-y-8"
+>
+  <input type="hidden" name="form_id" value="client-intake" />
+
+  <div aria-hidden="true" class="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden" tabindex="-1">
+    <label>
+      Website (leave this empty)
+      <input
+        type="text"
+        name={formConfig.honeypotFieldName}
+        tabindex="-1"
+        autocomplete="off"
+      />
+    </label>
+  </div>
+
+  <fieldset class="space-y-5">
+    <legend class="text-lg font-medium text-cream">Owner details</legend>
+    <div class="grid gap-5 md:grid-cols-2">
+      <FormField id="ownerFullName" name="ownerFullName" label="Full name" required autocomplete="name" />
+      <FormField id="contactEmail" name="contactEmail" label="Email" type="email" required autocomplete="email" />
+      <FormField id="contactPhone" name="contactPhone" label="Phone" type="tel" required autocomplete="tel" />
+      <FormField id="emergencyContactName" name="emergencyContactName" label="Emergency contact name" />
+    </div>
+    <FormField id="emergencyContactPhone" name="emergencyContactPhone" label="Emergency contact phone" type="tel" />
+    <FormField
+      id="serviceAddress"
+      name="serviceAddress"
+      label="Address where visits take place"
+      type="textarea"
+      rows={3}
+      required
+      autocomplete="street-address"
+      hint="This information is used only to provide your bookings and is kept securely."
+    />
+  </fieldset>
+
+  <fieldset class="space-y-5">
+    <legend class="text-lg font-medium text-cream">Vet details</legend>
+    <div class="grid gap-5 md:grid-cols-2">
+      <FormField id="vetName" name="vetName" label="Vet practice name" />
+      <FormField id="vetPhone" name="vetPhone" label="Vet phone" type="tel" />
+    </div>
+  </fieldset>
+
+  <fieldset class="space-y-5">
+    <legend class="text-lg font-medium text-cream">Your cats</legend>
+    <FormField id="catNames" name="catNames" label="Cat names" required />
+    <FormField
+      id="catDetails"
+      name="catDetails"
+      label="Age, breed and any health notes"
+      type="textarea"
+      rows={3}
+      optional
+    />
+    <FormField
+      id="indoorOutdoorStatus"
+      name="indoorOutdoorStatus"
+      label="Indoor or outdoor"
+      type="select"
+      options={[
+        { value: 'indoor', label: 'Indoor only' },
+        { value: 'outdoor', label: 'Outdoor access' },
+        { value: 'mixed', label: 'A mix' },
+      ]}
+    />
+  </fieldset>
+
+  <fieldset class="space-y-5">
+    <legend class="text-lg font-medium text-cream">Care instructions</legend>
+    <FormField
+      id="feedingInstructions"
+      name="feedingInstructions"
+      label="Feeding"
+      type="textarea"
+      rows={3}
+      required
+      hint="Type, brand, amount, when and where."
+    />
+    <FormField
+      id="litterInstructions"
+      name="litterInstructions"
+      label="Litter"
+      type="textarea"
+      rows={3}
+      required
+      hint="Number of trays, type of litter, where they live, how to refresh."
+    />
+    <FormField
+      id="medicationInstructions"
+      name="medicationInstructions"
+      label="Medication"
+      type="textarea"
+      rows={3}
+      optional
+      hint="If any medication is needed, please share what, when and how."
+    />
+    <FormField
+      id="behaviourNotes"
+      name="behaviourNotes"
+      label="Behaviour notes"
+      type="textarea"
+      rows={3}
+      optional
+      hint="Anything helpful to know about temperament, hiding spots, do-not-disturb cues."
+    />
+  </fieldset>
+
+  <fieldset class="space-y-5">
+    <legend class="text-lg font-medium text-cream">Access and household</legend>
+    <FormField
+      id="accessNotes"
+      name="accessNotes"
+      label="Alarm and access notes"
+      type="textarea"
+      rows={3}
+      hint="Alarm codes, key safe codes, parking, door quirks."
+    />
+    <FormField
+      id="keyCollectionReturn"
+      name="keyCollectionReturn"
+      label="Key collection and return"
+      type="textarea"
+      rows={2}
+    />
+    <FormField
+      id="householdRequests"
+      name="householdRequests"
+      label="Other household requests"
+      type="textarea"
+      rows={3}
+      optional
+      hint="Plants, fish, parcels in, bins out and so on."
+    />
+    <FormField
+      id="anythingElse"
+      name="anythingElse"
+      label="Anything else we should know"
+      type="textarea"
+      rows={3}
+      optional
+    />
+  </fieldset>
+
+  <fieldset class="rounded-2xl border border-border-muted/40 bg-canvas-soft/40 p-5 space-y-3">
+    <label class="flex items-start gap-3 text-sm leading-relaxed cursor-pointer">
+      <input
+        type="checkbox"
+        name="emergencyAuth"
+        class="mt-1 h-4 w-4 rounded border-border-muted bg-canvas-deep accent-accent"
+      />
+      <span class="text-cream/85">
+        I authorise Curl Up Club to seek emergency veterinary care for my cats if it is reasonably needed and I cannot be reached. I understand I remain responsible for any costs.
+      </span>
+    </label>
+    <label class="flex items-start gap-3 text-sm leading-relaxed cursor-pointer">
+      <input
+        type="checkbox"
+        name="consent"
+        required
+        class="mt-1 h-4 w-4 rounded border-border-muted bg-canvas-deep accent-accent"
+      />
+      <span class="text-cream/85">
+        I agree to the
+        <a href="/privacy-policy/" class="text-accent underline underline-offset-2">Privacy Policy</a>
+        and
+        <a href="/terms-and-conditions/" class="text-accent underline underline-offset-2">Terms &amp; Conditions</a>.
+      </span>
+    </label>
+    <p
+      class="text-xs text-accent hidden"
+      role="alert"
+      data-error-for="consent"
+    ></p>
+  </fieldset>
+
+  {formConfig.turnstileSiteKey && (
+    <div
+      class="cf-turnstile"
+      data-sitekey={formConfig.turnstileSiteKey}
+      data-theme="dark"
+    ></div>
+  )}
+
+  <FormNotice tone="error" class="hidden">
+    <span data-form-status></span>
+  </FormNotice>
+
+  <div class="flex flex-wrap items-center gap-3">
+    <Button type="submit" variant="primary" size="lg">Submit care details</Button>
+    <p class="text-xs text-cream/60">
+      This form is sent only to Curl Up Club and is used to provide your bookings.
+    </p>
+  </div>
+</form>
+
+{formConfig.turnstileSiteKey && (
+  <script
+    is:inline
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+  ></script>
+)}
+
+<script>
+  const form = document.getElementById('client-intake-form') as HTMLFormElement | null;
+  if (form) {
+    const statusBox = form.querySelector('[data-form-status]') as HTMLElement | null;
+    const statusContainer = statusBox?.closest('[role="alert"], [role="status"]') as HTMLElement | null;
+    const successRedirect = form.dataset.successRedirect ?? '/thank-you/';
+
+    function showFieldError(name: string, message: string) {
+      const target = form?.querySelector(`[data-error-for="${name}"]`) as HTMLElement | null;
+      const input = form?.querySelector(`[name="${name}"]`) as HTMLElement | null;
+      if (target) {
+        target.textContent = message;
+        target.classList.remove('hidden');
+      }
+      if (input) input.setAttribute('aria-invalid', 'true');
+    }
+
+    function clearErrors() {
+      form?.querySelectorAll('[data-error-for]').forEach((node) => {
+        node.textContent = '';
+        node.classList.add('hidden');
+      });
+      form?.querySelectorAll('[aria-invalid="true"]').forEach((node) => {
+        node.removeAttribute('aria-invalid');
+      });
+      if (statusContainer) statusContainer.classList.add('hidden');
+      if (statusBox) statusBox.textContent = '';
+    }
+
+    function showFormError(message: string) {
+      if (statusContainer) statusContainer.classList.remove('hidden');
+      if (statusBox) statusBox.textContent = message;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearErrors();
+
+      const formData = new FormData(form);
+      const required = ['ownerFullName', 'contactEmail', 'contactPhone', 'serviceAddress', 'catNames', 'feedingInstructions', 'litterInstructions'];
+      let ok = true;
+      for (const f of required) {
+        if (!String(formData.get(f) ?? '').trim()) {
+          showFieldError(f, 'Please complete this field.');
+          ok = false;
+        }
+      }
+      if (!formData.get('consent')) {
+        showFieldError('consent', 'Please agree to the Privacy Policy and Terms & Conditions to continue.');
+        ok = false;
+      }
+      if (!ok) return;
+
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending\u2026';
+      }
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' },
+        });
+        if (response.ok) {
+          window.location.href = successRedirect;
+          return;
+        }
+        let message = 'Something went wrong. Please try again or email contact@curlupclub.com.';
+        try {
+          const data = await response.json();
+          if (data?.error) message = data.error;
+        } catch {
+          // non-JSON response
+        }
+        showFormError(message);
+      } catch {
+        showFormError('We could not reach the server. Please check your connection or email contact@curlupclub.com.');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit care details';
+        }
+      }
+    });
+  }
+</script>

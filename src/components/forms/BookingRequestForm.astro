@@ -1,0 +1,335 @@
+---
+import FormField from './FormField.astro';
+import FormNotice from './FormNotice.astro';
+import Button from '~/components/ui/Button.astro';
+import { formConfig } from '~/config/form';
+---
+
+<form
+  id="booking-request-form"
+  method="post"
+  action={formConfig.bookingRequestEndpoint}
+  novalidate
+  data-success-redirect={formConfig.successRedirect}
+  data-turnstile-key={formConfig.turnstileSiteKey}
+  class="space-y-6"
+>
+  <input type="hidden" name="form_id" value="booking-request" />
+
+  {/* Honeypot - bots fill this, humans cannot see it */}
+  <div aria-hidden="true" class="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden" tabindex="-1">
+    <label>
+      Website (leave this empty)
+      <input
+        type="text"
+        name={formConfig.honeypotFieldName}
+        tabindex="-1"
+        autocomplete="off"
+      />
+    </label>
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2">
+    <FormField
+      id="ownerName"
+      name="ownerName"
+      label="Your name"
+      required
+      autocomplete="name"
+      placeholder="e.g. Sam"
+    />
+
+    <FormField
+      id="email"
+      name="email"
+      label="Email"
+      type="email"
+      required
+      autocomplete="email"
+      placeholder="you@example.com"
+    />
+
+    <FormField
+      id="phone"
+      name="phone"
+      label="Phone"
+      type="tel"
+      optional
+      autocomplete="tel"
+      inputmode="tel"
+      placeholder="UK mobile or landline"
+    />
+
+    <FormField
+      id="townOrPostcode"
+      name="townOrPostcode"
+      label="Town or postcode area"
+      required
+      autocomplete="postal-code"
+      placeholder="e.g. Llangollen or LL20"
+    />
+
+    <FormField
+      id="preferredContactMethod"
+      name="preferredContactMethod"
+      label="Preferred contact method"
+      type="select"
+      options={[
+        { value: 'email', label: 'Email' },
+        { value: 'phone', label: 'Phone' },
+        { value: 'either', label: 'Either is fine' },
+      ]}
+    />
+
+    <FormField
+      id="numberOfCats"
+      name="numberOfCats"
+      label="Number of cats"
+      type="number"
+      min={1}
+      max={10}
+      inputmode="numeric"
+      placeholder="1"
+    />
+
+    <FormField
+      id="catNames"
+      name="catNames"
+      label="Cat names"
+      optional
+      placeholder="e.g. Mochi and Pickles"
+    />
+
+    <FormField
+      id="serviceType"
+      name="serviceType"
+      label="Service type"
+      type="select"
+      required
+      options={[
+        { value: '', label: 'Please choose' },
+        { value: 'drop-in-once', label: 'Drop-in visit, once a day (£13 per visit)' },
+        { value: 'drop-in-twice', label: 'Drop-in visits, twice a day (£13 per visit)' },
+        { value: 'overnight', label: 'Overnight house sitting (£92 per night)' },
+        { value: 'discuss', label: 'Not sure - happy to discuss' },
+      ]}
+    />
+
+    <FormField
+      id="startDate"
+      name="startDate"
+      label="Requested start date"
+      type="date"
+      required
+    />
+
+    <FormField
+      id="endDate"
+      name="endDate"
+      label="Requested end date"
+      type="date"
+      required
+    />
+
+    <FormField
+      id="medicationRequired"
+      name="medicationRequired"
+      label="Does any cat need medication?"
+      type="select"
+      options={[
+        { value: 'no', label: 'No' },
+        { value: 'yes', label: 'Yes' },
+        { value: 'unsure', label: 'Not sure yet' },
+      ]}
+    />
+  </div>
+
+  <FormField
+    id="notes"
+    name="notes"
+    label="Anything else"
+    type="textarea"
+    optional
+    placeholder="Anything we should know up front. Care details can come later if your booking is agreed."
+    hint="Please keep this brief. Detailed care information is collected on a separate form after a booking is agreed in principle."
+  />
+
+  <fieldset class="rounded-2xl border border-border-muted/40 bg-canvas-soft/40 p-5">
+    <label class="flex items-start gap-3 text-sm leading-relaxed cursor-pointer">
+      <input
+        type="checkbox"
+        name="consent"
+        required
+        class="mt-1 h-4 w-4 rounded border-border-muted bg-canvas-deep accent-accent"
+      />
+      <span class="text-cream/85">
+        I agree to the
+        <a href="/privacy-policy/" class="text-accent underline underline-offset-2">Privacy Policy</a>
+        and
+        <a href="/terms-and-conditions/" class="text-accent underline underline-offset-2">Terms &amp; Conditions</a>.
+      </span>
+    </label>
+    <p
+      class="mt-2 text-xs text-accent hidden"
+      role="alert"
+      data-error-for="consent"
+    ></p>
+  </fieldset>
+
+  {formConfig.turnstileSiteKey && (
+    <div
+      class="cf-turnstile"
+      data-sitekey={formConfig.turnstileSiteKey}
+      data-theme="dark"
+    ></div>
+  )}
+
+  <FormNotice tone="error" class="hidden">
+    <span data-form-status></span>
+  </FormNotice>
+
+  <div class="flex flex-wrap items-center gap-3">
+    <Button type="submit" variant="primary" size="lg">
+      Send enquiry
+    </Button>
+    <p class="text-xs text-cream/60">
+      Submitting this form does not guarantee a booking.
+    </p>
+  </div>
+</form>
+
+{formConfig.turnstileSiteKey && (
+  <script
+    is:inline
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+  ></script>
+)}
+
+<script>
+  const form = document.getElementById('booking-request-form') as HTMLFormElement | null;
+  if (form) {
+    const statusBox = form.querySelector('[data-form-status]') as HTMLElement | null;
+    const statusContainer = statusBox?.closest('[role="alert"], [role="status"]') as HTMLElement | null;
+    const successRedirect = form.dataset.successRedirect ?? '/thank-you/';
+
+    function showFieldError(name: string, message: string) {
+      const target = form?.querySelector(`[data-error-for="${name}"]`) as HTMLElement | null;
+      const input = form?.querySelector(`[name="${name}"]`) as HTMLElement | null;
+      if (target) {
+        target.textContent = message;
+        target.classList.remove('hidden');
+      }
+      if (input) {
+        input.setAttribute('aria-invalid', 'true');
+      }
+    }
+
+    function clearErrors() {
+      form?.querySelectorAll('[data-error-for]').forEach((node) => {
+        node.textContent = '';
+        node.classList.add('hidden');
+      });
+      form?.querySelectorAll('[aria-invalid="true"]').forEach((node) => {
+        node.removeAttribute('aria-invalid');
+      });
+      if (statusContainer) statusContainer.classList.add('hidden');
+      if (statusBox) statusBox.textContent = '';
+    }
+
+    function showFormError(message: string) {
+      if (statusContainer) statusContainer.classList.remove('hidden');
+      if (statusBox) statusBox.textContent = message;
+    }
+
+    function validate(formData: FormData): boolean {
+      let ok = true;
+      const required: Array<[string, string]> = [
+        ['ownerName', 'Please share your name so we know how to reply.'],
+        ['email', 'Please enter an email address.'],
+        ['townOrPostcode', 'Please share your town or postcode area.'],
+        ['startDate', 'Please choose a requested start date.'],
+        ['endDate', 'Please choose a requested end date.'],
+        ['serviceType', 'Please choose a visit frequency.'],
+      ];
+      for (const [field, msg] of required) {
+        const v = String(formData.get(field) ?? '').trim();
+        if (!v) {
+          showFieldError(field, msg);
+          ok = false;
+        }
+      }
+      const email = String(formData.get('email') ?? '');
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showFieldError('email', 'That email address does not look right.');
+        ok = false;
+      }
+      const start = String(formData.get('startDate') ?? '');
+      const end = String(formData.get('endDate') ?? '');
+      if (start && end && new Date(end) < new Date(start)) {
+        showFieldError('endDate', 'End date should be on or after the start date.');
+        ok = false;
+      }
+      if (!formData.get('consent')) {
+        showFieldError(
+          'consent',
+          'Please agree to the Privacy Policy and Terms & Conditions to continue.',
+        );
+        ok = false;
+      }
+      return ok;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearErrors();
+
+      const formData = new FormData(form);
+
+      if (!validate(formData)) return;
+
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending\u2026';
+      }
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' },
+        });
+
+        if (response.ok) {
+          window.location.href = successRedirect;
+          return;
+        }
+
+        let message = 'Something went wrong sending your enquiry. Please try again or email contact@curlupclub.com.';
+        try {
+          const data = await response.json();
+          if (data?.error) message = data.error;
+          if (Array.isArray(data?.fieldErrors)) {
+            for (const fe of data.fieldErrors) {
+              showFieldError(fe.field, fe.message);
+            }
+          }
+        } catch {
+          // non-JSON response
+        }
+        showFormError(message);
+      } catch {
+        showFormError(
+          'We could not reach the form server. Please check your connection or email contact@curlupclub.com.',
+        );
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send enquiry';
+        }
+      }
+    });
+  }
+</script>

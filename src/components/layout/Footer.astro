@@ -1,0 +1,111 @@
+---
+import { businessConfig } from '~/config/business';
+import { siteConfig } from '~/config/site';
+import { mainNavigation, footerNavigation } from '~/config/navigation';
+import { copyrightYear } from '~/lib/formatters';
+---
+
+<footer class="bg-canvas-deep border-t border-border-muted/30 mt-20">
+  <div class="container-page py-14">
+    <div class="grid gap-10 md:grid-cols-4">
+      <div class="md:col-span-2 max-w-md">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="inline-flex h-10 w-10 rounded-full overflow-hidden ring-1 ring-border-muted/40 bg-canvas">
+            <img
+              src="/images/brand/curl-up-club-logo.png"
+              alt=""
+              width="40"
+              height="40"
+              class="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </span>
+          <p class="font-serif text-lg text-cream">{siteConfig.siteShortName}</p>
+        </div>
+        <p class="text-sm text-cream/75 leading-relaxed">
+          {siteConfig.siteDescription}
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xs uppercase tracking-wider text-cream/60 font-medium mb-4">
+          Site
+        </h3>
+        <ul class="space-y-2 text-sm">
+          {mainNavigation.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-cream/85 hover:text-accent transition-colors"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs uppercase tracking-wider text-cream/60 font-medium mb-4">
+          Get in touch
+        </h3>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <a
+              href={`mailto:${businessConfig.primaryEmail}`}
+              class="text-cream/85 hover:text-accent transition-colors break-all"
+            >
+              {businessConfig.primaryEmail}
+            </a>
+          </li>
+          <li>
+            <a
+              href={`tel:${businessConfig.phone}`}
+              class="text-cream/85 hover:text-accent transition-colors"
+            >
+              {businessConfig.phoneDisplay}
+            </a>
+          </li>
+          <li class="text-cream/65">
+            {businessConfig.address.locality}, {businessConfig.address.country}
+          </li>
+          <li class="text-cream/65">
+            {businessConfig.serviceAreaSummary}
+          </li>
+          <li class="text-cream/65">
+            {businessConfig.hours.summary}
+          </li>
+          <li>
+            <a
+              href={businessConfig.facebookUrl}
+              class="text-cream/85 hover:text-accent transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Facebook page
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="my-10" />
+
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-cream/60">
+      <p>&copy; {copyrightYear()} {businessConfig.businessName}. All rights reserved.</p>
+      <ul class="flex flex-wrap gap-x-5 gap-y-1">
+        {footerNavigation.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="hover:text-accent transition-colors"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,64 @@
+---
+// Accessible image lightbox island.
+// Listens for clicks on elements with [data-lightbox-trigger] inside the gallery,
+// reads the closest <img> for src + alt, and shows it in a modal dialog.
+---
+
+<dialog
+  id="curl-lightbox"
+  class="bg-transparent p-0 m-0 max-w-none max-h-none w-full h-full backdrop:bg-canvas-deep/85 backdrop:backdrop-blur-sm"
+  aria-label="Image preview"
+>
+  <div class="relative w-full h-full flex items-center justify-center p-6 md:p-12">
+    <button
+      type="button"
+      data-lightbox-close
+      class="absolute top-4 right-4 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-canvas/80 text-cream hover:bg-canvas border border-border-muted/40 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+      aria-label="Close image preview"
+    >
+      <svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M5 5l10 10M15 5L5 15" />
+      </svg>
+    </button>
+
+    <figure class="max-w-5xl w-full max-h-full flex flex-col items-center gap-3">
+      <img
+        id="curl-lightbox-img"
+        src=""
+        alt=""
+        class="max-h-[80vh] w-auto rounded-2xl ring-1 ring-border-muted/40 shadow-lift bg-canvas-deep"
+      />
+      <figcaption
+        id="curl-lightbox-caption"
+        class="text-sm text-cream/85 text-center max-w-xl"
+      ></figcaption>
+    </figure>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('curl-lightbox') as HTMLDialogElement | null;
+  const img = document.getElementById('curl-lightbox-img') as HTMLImageElement | null;
+  const caption = document.getElementById('curl-lightbox-caption');
+
+  if (dialog && img && caption) {
+    document.querySelectorAll<HTMLElement>('[data-lightbox-trigger]').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const src = trigger.dataset.src ?? '';
+        const alt = trigger.dataset.alt ?? '';
+        const cap = trigger.dataset.caption ?? '';
+        img.src = src;
+        img.alt = alt;
+        caption.textContent = cap;
+        if (typeof dialog.showModal === 'function') dialog.showModal();
+      });
+    });
+
+    dialog.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      if (target === dialog || target.closest('[data-lightbox-close]')) {
+        dialog.close();
+      }
+    });
+  }
+</script>

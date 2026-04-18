@@ -1,0 +1,36 @@
+---
+import Section from '~/components/ui/Section.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import PricingCard from '~/components/ui/PricingCard.astro';
+import Button from '~/components/ui/Button.astro';
+import { pricingContent } from '~/content/pricing';
+import { homepageContent } from '~/content/homepage';
+---
+
+<Section spacing="lg" tone="soft">
+  <SectionHeading
+    eyebrow="Pricing"
+    title={homepageContent.featuredSections.pricingTitle}
+    subtitle={homepageContent.featuredSections.pricingSubtitle}
+    align="center"
+    class="mb-12"
+  />
+
+  <div class="grid gap-6 md:grid-cols-3 items-stretch">
+    {pricingContent.plans.map((plan) => (
+      <PricingCard
+        name={plan.name}
+        price={plan.price}
+        unit={plan.unit}
+        description={plan.description}
+        includes={plan.includes}
+        featured={plan.featured}
+      />
+    ))}
+  </div>
+
+  <div class="mt-12 flex flex-wrap justify-center gap-3">
+    <Button href="/pricing/" variant="secondary">Full pricing</Button>
+    <Button href="/contact/" variant="primary">Request availability</Button>
+  </div>
+</Section>
