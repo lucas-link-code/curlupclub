@@ -1,6 +1,7 @@
 ---
 import Section from '~/components/ui/Section.astro';
 import Button from '~/components/ui/Button.astro';
+import ServiceAreaMap from '~/components/map/ServiceAreaMap.astro';
 import { serviceAreaContent } from '~/content/service-area';
 ---
 
@@ -26,25 +27,11 @@ import { serviceAreaContent } from '~/content/service-area';
       </div>
     </div>
 
-    <div class="relative aspect-[4/3] rounded-3xl overflow-hidden ring-1 ring-border-muted/40 shadow-lift bg-canvas-deep">
-      <div class="absolute inset-0 grid place-items-center">
-        <svg
-          aria-hidden="true"
-          class="h-32 w-32 text-cream/30"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-        >
-          <path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8Z" />
-          <circle cx="12" cy="10" r="3" />
-        </svg>
-      </div>
-      <div class="absolute bottom-4 left-4 right-4 rounded-2xl bg-canvas/90 border border-border-muted/40 p-4 backdrop-blur-sm">
-        <p class="text-xs text-cream/85">
-          The full map shows an approximate service area only. No home address is shown.
-        </p>
-      </div>
+    <div>
+      <ServiceAreaMap />
+      <p class="mt-3 text-xs text-cream/70 leading-relaxed">
+        The map shows an approximate service area only. No home address is shown.
+      </p>
     </div>
   </div>
 </Section>
