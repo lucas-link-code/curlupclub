@@ -99,8 +99,8 @@
     max-width: 1180px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   @media (min-width: 768px) {
@@ -115,6 +115,17 @@
     font-size: 1.25rem;
     color: var(--color-accent);
     letter-spacing: 0.01em;
+  }
+
+  .h-fluid-display {
+    font-size: clamp(2rem, 6.4vw + 0.5rem, 3.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+
+  .h-fluid-section {
+    font-size: clamp(1.625rem, 3.2vw + 0.9rem, 3rem);
+    line-height: 1.15;
   }
 
   .prose-cream p {

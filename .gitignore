@@ -36,3 +36,9 @@ worker/node_modules/
 
 # Internal planning notes - not for public repo
 curlupclub_proposed_file_tree_and_content_pack.md
+
+# Local QA artifacts (Playwright MCP screenshots and traces)
+.playwright-mcp/
+*-after.jpeg
+hero-*.jpeg
+viewport-test.jpeg

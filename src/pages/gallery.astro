@@ -12,11 +12,11 @@ import { galleryContent } from '~/content/gallery';
 >
   <Section spacing="lg" tone="canvas">
     <div class="max-w-2xl">
-      <p class="eyebrow mb-3">Gallery</p>
-      <h1 class="text-4xl md:text-5xl font-medium leading-[1.1]">
+      <p class="eyebrow mb-2">Gallery</p>
+      <h1 class="h-fluid-display font-medium">
         {galleryContent.pageTitle}
       </h1>
-      <p class="mt-6 text-lg text-cream/85 leading-relaxed">
+      <p class="mt-4 md:mt-6 text-base md:text-lg text-cream/85 leading-relaxed">
         {galleryContent.intro}
       </p>
     </div>
@@ -29,7 +29,7 @@ import { galleryContent } from '~/content/gallery';
       </p>
     ) : (
       <ul
-        class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        class="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3"
         role="list"
       >
         {galleryContent.images.map((image, index) => (
@@ -40,7 +40,7 @@ import { galleryContent } from '~/content/gallery';
               data-src={image.src}
               data-alt={image.alt}
               data-caption={image.caption ?? ''}
-              class="group block w-full aspect-[4/5] sm:aspect-square rounded-3xl overflow-hidden ring-1 ring-border-muted/40 bg-canvas-deep shadow-soft focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+              class="group block w-full aspect-square rounded-2xl sm:rounded-3xl overflow-hidden ring-1 ring-border-muted/40 bg-canvas-deep shadow-soft focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
               aria-label={`Open image: ${image.alt}`}
             >
               <img

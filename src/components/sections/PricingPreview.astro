@@ -13,10 +13,10 @@ import { homepageContent } from '~/content/homepage';
     title={homepageContent.featuredSections.pricingTitle}
     subtitle={homepageContent.featuredSections.pricingSubtitle}
     align="center"
-    class="mb-12"
+    class="mb-8 md:mb-12"
   />
 
-  <div class="grid gap-6 md:grid-cols-3 items-stretch">
+  <div class="grid gap-4 md:gap-6 md:grid-cols-3 items-stretch">
     {pricingContent.plans.map((plan) => (
       <PricingCard
         name={plan.name}

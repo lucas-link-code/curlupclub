@@ -13,13 +13,13 @@ const { name, price, unit, description, includes, featured = false } =
 ---
 
 <article
-  class={`rounded-3xl p-7 md:p-9 shadow-soft flex flex-col h-full ${
+  class={`rounded-3xl p-5 md:p-9 shadow-soft flex flex-col h-full ${
     featured
       ? 'bg-accent text-ink border border-accent-soft'
       : 'bg-card border border-border-muted/40 text-cream'
   }`}
 >
-  <header class="mb-6">
+  <header class="mb-4 md:mb-6">
     <h3 class={`text-2xl font-medium ${featured ? 'text-ink' : 'text-cream'}`}>
       {name}
     </h3>
@@ -28,7 +28,7 @@ const { name, price, unit, description, includes, featured = false } =
     </p>
   </header>
 
-  <div class="mb-6">
+  <div class="mb-4 md:mb-6">
     <span class={`text-4xl md:text-5xl font-serif font-medium ${featured ? 'text-ink' : 'text-cream'}`}>
       {price}
     </span>
@@ -39,7 +39,7 @@ const { name, price, unit, description, includes, featured = false } =
     )}
   </div>
 
-  <ul class="space-y-3 mb-8 flex-grow">
+  <ul class="space-y-2.5 mb-6 md:space-y-3 md:mb-8 flex-grow">
     {includes.map((item) => (
       <li class="flex items-start gap-2 text-sm leading-relaxed">
         <svg

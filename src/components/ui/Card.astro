@@ -16,9 +16,9 @@ const padding: Padding = props.padding ?? 'md';
 const tone: Tone = props.tone ?? 'default';
 
 const padMap: Record<Padding, string> = {
-  sm: 'p-5',
-  md: 'p-7',
-  lg: 'p-9',
+  sm: 'p-4 md:p-5',
+  md: 'p-5 md:p-7',
+  lg: 'p-6 md:p-9',
 };
 
 const toneMap: Record<Tone, string> = {
