@@ -17,6 +17,11 @@ export const galleryContent = {
     'A small selection of cats and calm moments from sitting visits. New photos are added gradually, only ever with the owner\u2019s permission.',
   images: [
     {
+      src: '/images/gallery/leah-and-clara.png',
+      alt: 'Leah smiling gently behind her own tuxedo cat Clara, who is purring with eyes closed against her shoulder',
+      caption: 'Leah at home with her own cat Clara.',
+    },
+    {
       src: '/images/gallery/cats-grid-collage.png',
       alt: 'Collage of sixteen different cats Leah has cared for, including tuxedos, tabbies, ginger and black cats',
       caption:
@@ -47,11 +52,6 @@ export const galleryContent = {
       alt: 'Three cats relaxing together on a cat tree at home',
       caption:
         'Cats stay relaxed in their own home, with all their familiar perches.',
-    },
-    {
-      src: '/images/gallery/leah-and-clara.png',
-      alt: 'Leah smiling gently behind her own tuxedo cat Clara, who is purring with eyes closed against her shoulder',
-      caption: 'Leah at home with her own cat Clara.',
     },
     {
       src: '/images/gallery/services_advert.png',
