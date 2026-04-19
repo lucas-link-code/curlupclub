@@ -17,7 +17,6 @@ export function localBusinessJsonLd() {
     description: siteConfig.siteDescription,
     slogan: businessConfig.slogan,
     url: siteConfig.siteUrl,
-    telephone: businessConfig.phone,
     email: `mailto:${businessConfig.primaryEmail}`,
     image: `${siteConfig.siteUrl}${siteConfig.defaultOgImage}`,
     logo: `${siteConfig.siteUrl}/images/brand/curl-up-club-logo.png`,

@@ -32,9 +32,11 @@ import { businessConfig } from '~/config/business';
           </p>
           <p>
             <a
-              href={`tel:${businessConfig.phone}`}
+              href={businessConfig.facebookUrl}
               class="text-accent underline underline-offset-2"
-            >{businessConfig.phoneDisplay}</a>
+              target="_blank"
+              rel="noopener noreferrer"
+            >Curl Up Club on Facebook</a>
           </p>
           <p class="text-cream/85">
             {businessConfig.hours.summary}
