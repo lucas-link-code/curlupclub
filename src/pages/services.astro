@@ -3,11 +3,21 @@ import MainLayout from '~/components/layout/MainLayout.astro';
 import Section from '~/components/ui/Section.astro';
 import CtaBand from '~/components/sections/CtaBand.astro';
 import { servicesContent } from '~/content/services';
+import { servicesJsonLd, breadcrumbJsonLd } from '~/lib/jsonld';
+
+const servicesPageJsonLd = [
+  servicesJsonLd(),
+  breadcrumbJsonLd([
+    { name: 'Home', href: '/' },
+    { name: servicesContent.pageTitle, href: '/services/' },
+  ]),
+];
 ---
 
 <MainLayout
   title={servicesContent.pageTitle}
   description={servicesContent.pageDescription}
+  jsonLd={servicesPageJsonLd}
 >
   <Section spacing="lg" tone="canvas">
     <div class="max-w-2xl">

@@ -8,8 +8,10 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   noindex?: boolean;
   includeBusinessSchema?: boolean;
+  jsonLd?: unknown[];
   bodyClass?: string;
 }
 
@@ -17,8 +19,10 @@ const {
   title,
   description,
   ogImage,
+  ogImageAlt,
   noindex = false,
   includeBusinessSchema = false,
+  jsonLd = [],
   bodyClass = '',
 } = Astro.props;
 ---
@@ -30,8 +34,10 @@ const {
       title={title}
       description={description}
       ogImage={ogImage}
+      ogImageAlt={ogImageAlt}
       noindex={noindex}
       includeBusinessSchema={includeBusinessSchema}
+      jsonLd={jsonLd}
     />
   </head>
   <body class={`bg-canvas text-cream min-h-screen antialiased ${bodyClass}`}>

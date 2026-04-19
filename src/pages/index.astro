@@ -9,9 +9,12 @@ import ServiceAreaPreview from '~/components/sections/ServiceAreaPreview.astro';
 import Testimonials from '~/components/sections/Testimonials.astro';
 import GalleryPreview from '~/components/sections/GalleryPreview.astro';
 import CtaBand from '~/components/sections/CtaBand.astro';
+import { webSiteJsonLd } from '~/lib/jsonld';
+
+const homeJsonLd = [webSiteJsonLd()];
 ---
 
-<MainLayout includeBusinessSchema>
+<MainLayout includeBusinessSchema jsonLd={homeJsonLd}>
   <Hero />
   <TrustBar />
   <ServicesPreview />
