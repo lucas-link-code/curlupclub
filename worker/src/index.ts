@@ -16,6 +16,7 @@ export interface Env {
 }
 
 const HONEYPOT_FIELD = 'website_url';
+const IN_MEMORY_HITS_MAX_ENTRIES = 5000;
 
 const REQUIRED_BOOKING_FIELDS = [
   'ownerName',
@@ -127,12 +128,18 @@ export default {
         await sendViaResend(env, subject, text);
       }
     } catch (error) {
-      console.error('Email transport failed', error);
+      logEvent('error', 'email_transport_failed', {
+        formType,
+        transport: env.EMAIL_TRANSPORT,
+        message: error instanceof Error ? error.message : String(error),
+      });
       return jsonResponse(502, {
         error:
           'We could not send your message right now. Please try again or email contact@curlupclub.com.',
       });
     }
+
+    logEvent('info', 'form_submission_ok', { formType });
 
     return jsonResponse(200, { ok: true });
   },
@@ -162,14 +169,46 @@ async function checkRateLimit(env: Env, ip: string): Promise<boolean> {
     return false;
   }
 
+  // Fallback: best-effort per-isolate counter. Bounded to avoid unbounded
+  // growth across long-lived isolates. Cleared opportunistically below.
   const existing = inMemoryHits.get(ip);
   if (existing && existing.expiresAt > now) {
     if (existing.count >= maxSubmissions) return true;
     existing.count += 1;
+    inMemoryHits.set(ip, existing);
     return false;
+  }
+  if (inMemoryHits.size >= IN_MEMORY_HITS_MAX_ENTRIES) {
+    pruneExpired(now);
+    if (inMemoryHits.size >= IN_MEMORY_HITS_MAX_ENTRIES) {
+      // Drop oldest insertion-order entry (Map iteration order is insertion).
+      const oldestKey = inMemoryHits.keys().next().value;
+      if (oldestKey !== undefined) inMemoryHits.delete(oldestKey);
+    }
   }
   inMemoryHits.set(ip, { count: 1, expiresAt: now + windowSeconds });
   return false;
+}
+
+function pruneExpired(now: number): void {
+  for (const [k, v] of inMemoryHits) {
+    if (v.expiresAt <= now) inMemoryHits.delete(k);
+  }
+}
+
+function logEvent(
+  level: 'info' | 'warn' | 'error',
+  event: string,
+  fields: Record<string, unknown> = {},
+): void {
+  const payload = { level, event, ...fields };
+  if (level === 'error') {
+    console.error(JSON.stringify(payload));
+  } else if (level === 'warn') {
+    console.warn(JSON.stringify(payload));
+  } else {
+    console.log(JSON.stringify(payload));
+  }
 }
 
 function renderEmailText(formType: string, formData: FormData): string {

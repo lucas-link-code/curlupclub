@@ -1,6 +1,7 @@
 name = "curlupclub-forms"
 main = "src/index.ts"
-compatibility_date = "2025-01-01"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
 
 # Bind two same-origin routes on the apex.
 # This lets the static site POST to /api/* without any CORS handshake.
@@ -9,6 +10,10 @@ routes = [
   { pattern = "curlupclub.com/api/booking-request", zone_name = "curlupclub.com" },
   { pattern = "curlupclub.com/api/client-intake", zone_name = "curlupclub.com" },
 ]
+
+[observability]
+enabled = true
+head_sampling_rate = 1
 
 [vars]
 RECIPIENT_EMAIL = "contact@curlupclub.com"

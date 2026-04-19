@@ -5,6 +5,10 @@ import PricingCard from '~/components/ui/PricingCard.astro';
 import Button from '~/components/ui/Button.astro';
 import { pricingContent } from '~/content/pricing';
 import { homepageContent } from '~/content/homepage';
+
+const previewPlans = pricingContent.plans.filter(
+  (plan) => plan.name !== 'Additional requests',
+);
 ---
 
 <Section spacing="lg" tone="soft">
@@ -17,7 +21,7 @@ import { homepageContent } from '~/content/homepage';
   />
 
   <div class="grid gap-4 md:gap-6 md:grid-cols-3 items-stretch">
-    {pricingContent.plans.map((plan) => (
+    {previewPlans.map((plan) => (
       <PricingCard
         name={plan.name}
         price={plan.price}

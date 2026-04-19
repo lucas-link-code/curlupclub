@@ -16,10 +16,11 @@ export const servicesContent = {
       slug: 'daily-visit',
       title: 'Once daily visits',
       description:
-        'A single home visit each day for cats who are comfortable with one check-in.',
+        'The standard option. A single home visit each day for cats who are comfortable with one check-in.',
       includes: [
         'Feeding and fresh water',
         'Litter tray cleaning and replenishing',
+        'Playtime',
         'General welfare check',
         'Treats if agreed',
         'Update after the visit',
@@ -35,19 +36,7 @@ export const servicesContent = {
         'Routine care repeated morning and evening',
         'More frequent welfare checks',
         'Extra reassurance for owners',
-      ],
-    },
-    {
-      slug: 'overnight-house-sitting',
-      title: 'Overnight house sitting',
-      description:
-        'Overnight stays in your home for cats who prefer continuous company, plus a lived-in feel for the house while you are away. Subject to availability and discussed at enquiry.',
-      includes: [
-        'Overnight presence in your home',
-        'Evening and morning cat care routine',
-        'Lights, curtains and a lived-in look',
-        'Same personalised updates as daily visits',
-        'Availability confirmed on a per-booking basis',
+        'Longer playtime',
       ],
     },
     {
@@ -73,6 +62,17 @@ export const servicesContent = {
         'Bring parcels in',
         'Feed fish',
         'Put bins out',
+        'Light cleaning duties',
+        'Small pet feeding - please enquire',
+      ],
+    },
+    {
+      slug: 'overnight-house-sitting',
+      title: 'Overnight house sitting',
+      description:
+        'Offered on a limited, per-booking basis for cats who prefer continuous company. Please enquire to discuss availability.',
+      includes: [
+        'Limited availability, please enquire to discuss your needs',
       ],
     },
   ] as ServiceItem[],
@@ -90,7 +90,7 @@ export const servicesContent = {
       'Photos where possible, only when cats are relaxed around the camera',
       'Treats given',
       'House updates if needed',
-      'Anything else specific to your cat\u2019s care',
+      "Anything else specific to your cat's care",
     ],
   },
 } as const;

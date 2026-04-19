@@ -1,21 +1,21 @@
 export const aboutContent = {
   pageTitle: 'About Leah',
   pageDescription:
-    'Curl Up Club is run by Leah, a lifelong cat lover offering calm, reliable in-home cat sitting near Llangollen.',
+    "I'm Leah, a lifelong cat lover offering calm, reliable in-home cat sitting.",
   intro:
-    'Curl Up Club is run by Leah, a lifelong cat owner who has spent years caring for her own cats and looking after cats for friends and family. That experience grew naturally into a calm, personal cat-sitting service built around clear communication and thoughtful care.',
+    "I'm Leah, a lifelong cat lover. I grew up with cats and have always enjoyed being around them. I became the go to sitter for friends and family, eventually making the decision to start the Curl Up Club last year.",
   storySections: [
     {
-      title: 'A genuine cat person',
-      body: 'Cats have always been part of Leah\u2019s life. She comes from a family of cat lovers and understands that every cat has its own routine, confidence level and quirks. Good cat sitting means respecting those differences rather than treating every visit the same way.',
+      title: 'Cat people',
+      body: 'I believe cats are truly special animals and it takes a \u2019cat person\u2019 to really understand that. I love that every cat has their own personality, confidence level and quirks. Good cat sitting means respecting those differences rather than treating every visit the same way.',
     },
     {
-      title: 'From helping friends to helping local owners',
-      body: 'Before formalising the service, Leah was already the person friends and family asked when they were going away. That trust, paired with a calm and dependable approach, became the foundation for the service she offers today.',
+      title: 'Getting to Know your cat',
+      body: "For me the best part of cat sitting is spending time getting to know your cat. Whether that's the confident regulars, who greet me at the door when I collect the keys from their owners, or the more timid cats, who watch me work from their hiding space, sneaking out for a treat as their confidence grows.",
     },
     {
       title: 'Meet Clara',
-      body: 'Leah\u2019s own cat, Clara, is part of the story. Living with a cat every day shapes the way Leah approaches visits: with patience, awareness and attention to the small details that matter to a cat.',
+      body: 'Clara is my ten year old cat with tuxedo markings. She is such a silly and happy girl who enjoys sniffing the flowers in our garden and curling up in strange places. This led to the idea for the name Curl Up Club!',
     },
   ],
   whyHomeVisits: {
@@ -36,7 +36,7 @@ export const aboutContent = {
       },
       {
         title: 'You stay informed',
-        body: 'Owners receive personalised updates so the trip away is calmer too.',
+        body: 'Owners receive personalised updates so you can enjoy your trip away, worry free.',
       },
     ],
   },

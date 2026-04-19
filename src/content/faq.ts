@@ -18,17 +18,17 @@ export const faqContent = {
     {
       question: 'Do you offer a meet and greet before the first booking?',
       answer:
-        'A short meet and greet can usually be arranged before a first booking so that cats can get used to a new face and care details can be agreed in person.',
+        'A short meet and greet is always arranged, around a week before a booking starts. This is a time when I can meet your cat if they are happy to, but most importantly so you can show me around and ask any extra questions. This is also usually the most convenient time for key collection.',
     },
     {
       question: 'Can medication be given during visits?',
       answer:
-        'Many medications can be given during visits, including oral medication. The exact arrangement is always discussed and agreed before the booking is confirmed.',
+        'Medication can usually be given during visits. The exact arrangement is always discussed and agreed before the booking is confirmed.',
     },
     {
       question: 'How will I hear from you while I am away?',
       answer:
-        'Updates are sent after visits and may include a short note about food, litter, behaviour and a photo where possible. You can tell us how often you want to hear from us.',
+        'Updates are sent after visits and may include a short note about food, litter, behaviour and a photo where possible. You can tell us how often you want to hear from us. I prefer to use WhatsApp but can also update by text if preferred',
     },
     {
       question: 'How does payment work?',
@@ -38,12 +38,12 @@ export const faqContent = {
     {
       question: 'What if my cat is shy or nervous?',
       answer:
-        'Shy cats are given space and are not forced to interact. Visits still include feeding, water, litter care and a careful welfare check, even if it is only confirming that your cat has been seen from a distance.',
+        "Shy cats are given space and are not forced to interact. Visits still include feeding, water, litter care and a careful welfare check, even if it is only confirming that your cat has been seen from a distance, or seeing evidence that they've eaten or used the litter tray.",
     },
     {
       question: 'How do you keep keys secure?',
       answer:
-        'Keys are kept securely and labelled discreetly with no address information. Key collection and return arrangements are agreed directly with you.',
+        'Keys are kept securely in my home and labelled discreetly with no address information. I use an airtag keyring during your booking. Key collection and return arrangements are agreed directly with you. I hand deliver the keys after your booking. I do not post keys after my last visit, but I can post them once you are home from your trip if you prefer.',
     },
   ] as FaqItem[],
 } as const;
