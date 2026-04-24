@@ -2,7 +2,7 @@
 Generate brand assets used by social previews and home-screen icons.
 
 Outputs:
-  public/og-image.png           1200x630 social sharing card (Open Graph)
+  public/og-image.jpg           1200x630 social sharing card (Open Graph, JPEG)
   public/apple-touch-icon.png   180x180 iOS home-screen icon
   public/icon-192.png           192x192 PWA / Android icon
   public/icon-512.png           512x512 PWA splash / large icon
@@ -23,7 +23,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 LOGO = ROOT / "public" / "images" / "brand" / "curl-up-club-logo.png"
-OUT = ROOT / "public" / "og-image.png"
+OUT = ROOT / "public" / "og-image.jpg"
 
 WIDTH, HEIGHT = 1200, 630
 
@@ -174,7 +174,7 @@ def main() -> None:
     paste_logo(canvas)
     draw_text_block(canvas)
     draw_decorative_frame(ImageDraw.Draw(canvas))
-    canvas.save(OUT, "PNG", optimize=True)
+    canvas.save(OUT, "JPEG", quality=92, optimize=True)
     print(f"wrote {OUT.name}  ({OUT.stat().st_size // 1024} KB)")
     write_icons()
 

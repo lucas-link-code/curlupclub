@@ -4,12 +4,13 @@ export const siteConfig = {
   siteShortName: 'Curl Up Club',
   siteDescription:
     'Cat Sitting in and around the Dee Valley. Calm, reliable in-home cat care across Llangollen, Chirk, Ruabon, Wrexham and Gobowen. Your cats stay comfortable in familiar surroundings while you are away.',
-  locale: 'en-GB',
+  locale: 'en_GB',
   themeColor: '#4b5647',
-  defaultOgImage: '/og-image.png',
+  defaultOgImage: '/og-image.jpg',
   defaultOgImageWidth: 1200,
   defaultOgImageHeight: 630,
-  defaultOgImageType: 'image/png',
+  defaultOgImageType: 'image/jpeg',
   defaultOgImageAlt:
     'Curl Up Club Cat Sitting in and around the Dee Valley, with the brand sleeping-cat logo on a sage background',
+  facebookAppId: '',
 } as const;
