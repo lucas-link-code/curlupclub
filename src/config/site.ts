@@ -12,5 +12,5 @@ export const siteConfig = {
   defaultOgImageType: 'image/jpeg',
   defaultOgImageAlt:
     'Curl Up Club Cat Sitting in and around the Dee Valley, with the brand sleeping-cat logo on a sage background',
-  facebookAppId: '',
+  facebookAppId: '1903272420354529',
 } as const;
