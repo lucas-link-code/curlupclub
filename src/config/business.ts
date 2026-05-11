@@ -50,9 +50,9 @@ export const businessConfig: BusinessConfig = {
   bookingModel: 'Manual enquiry and confirmation',
   paymentModel:
     'Payment is by invoice and bank transfer. Card payment via Stripe can be arranged on request.',
-  responsePromise: 'Replies as soon as possible, any day of the week',
+  responsePromise: 'Aims to reply within 24 hours, any day of the week',
   hours: {
-    summary: 'Always open. Enquiries answered as soon as possible.',
+    summary: 'Always open. Enquiries answered within 24 hours.',
     schemaSpec: [
       {
         dayOfWeek: [
